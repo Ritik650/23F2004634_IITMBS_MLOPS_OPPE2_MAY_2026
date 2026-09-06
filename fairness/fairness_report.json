@@ -1,0 +1,59 @@
+{
+  "note": "Deliverable text specifies 'age' as the sensitive attribute; the pipeline overview mentions 'gender'. Both are reported below for completeness.",
+  "age_analysis": {
+    "sensitive_attribute": "age (binned)",
+    "by_group": {
+      "accuracy": {
+        "40-49": 0.875,
+        "50-59": 0.816,
+        "60+": 0.8111111111111111,
+        "<40": 0.9375
+      },
+      "selection_rate": {
+        "40-49": 0.7916666666666666,
+        "50-59": 0.56,
+        "60+": 0.45555555555555555,
+        "<40": 0.8125
+      },
+      "f1": {
+        "40-49": 0.9158878504672897,
+        "50-59": 0.8296296296296296,
+        "60+": 0.7848101265822784,
+        "<40": 0.96
+      }
+    },
+    "overall": {
+      "accuracy": 0.834983498349835,
+      "selection_rate": 0.5973597359735974,
+      "f1": 0.8554913294797688
+    },
+    "demographic_parity_difference": 0.35694444444444445,
+    "demographic_parity_ratio": 0.5606837606837607,
+    "equalized_odds_difference": 0.1842105263157895
+  },
+  "gender_analysis": {
+    "sensitive_attribute": "gender",
+    "by_group": {
+      "accuracy": {
+        "female": 0.8958333333333334,
+        "male": 0.8067632850241546
+      },
+      "selection_rate": {
+        "female": 0.7916666666666666,
+        "male": 0.5072463768115942
+      },
+      "f1": {
+        "female": 0.9324324324324325,
+        "male": 0.797979797979798
+      }
+    },
+    "overall": {
+      "accuracy": 0.834983498349835,
+      "selection_rate": 0.5973597359735974,
+      "f1": 0.8554913294797688
+    },
+    "demographic_parity_difference": 0.2844202898550724,
+    "demographic_parity_ratio": 0.6407322654462243,
+    "equalized_odds_difference": 0.1088709677419355
+  }
+}

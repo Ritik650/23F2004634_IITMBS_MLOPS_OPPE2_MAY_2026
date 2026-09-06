@@ -1,0 +1,27 @@
+{
+  "ranked_feature_importance_mean_abs_shap": {
+    "cp": 0.8318589899686647,
+    "gender": 0.5960943784510566,
+    "thal": 0.563604050414863,
+    "ca": 0.5368612738327212,
+    "oldpeak": 0.5259407718793058,
+    "exang": 0.4479685402779748,
+    "thalach": 0.37552446905812364,
+    "chol": 0.3479061313146591,
+    "slope": 0.3073160861618857,
+    "restecg": 0.2226030073177436,
+    "trestbps": 0.15853668648054137,
+    "fbs": 0.04851272704599708,
+    "age": 0.015077875668036606
+  },
+  "least_impactful_features": [
+    "trestbps",
+    "fbs",
+    "age"
+  ],
+  "most_impactful_features": [
+    "cp",
+    "gender",
+    "thal"
+  ]
+}
