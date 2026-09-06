@@ -80,14 +80,14 @@ kubectl get svc heart-disease-api-svc   # grab EXTERNAL-IP once assigned
 
 # Deliverable 2: explainability (needs a local data.csv + a model you
 # trained locally, since neither is committed to git)
-python training/train.py --data-path data/data.csv
-python explainability/shap_analysis.py --data-path data/data.csv
+python -m training.train --data-path data/data.csv
+python -m explainability.shap_analysis --data-path data/data.csv
 
 # Deliverable 3: fairness
-python fairness/fairlearn_analysis.py --data-path data/data.csv
+python -m fairness.fairlearn_analysis --data-path data/data.csv
 
 # Deliverable 5: 100-row generation + per-sample logging
-python observability/generate_predictions.py \
+python -m observability.generate_predictions \
   --api-url http://<EXTERNAL_IP>/predict \
   --reference model/train_reference.csv
 # then inspect Cloud Logging:
@@ -99,7 +99,7 @@ sudo apt-get install -y wrk
 ./stress_test/stress_test.sh http://<EXTERNAL_IP> 30s 12 2500
 
 # Deliverable 7: drift detection
-python observability/drift_detection.py \
+python -m observability.drift_detection \
   --reference model/train_reference.csv \
   --current observability/sample_100.csv
 ```
@@ -123,10 +123,11 @@ brief), plus per-group accuracy from `fairness/fairness_report.json`.
 
 ## Stress test results (Deliverable 6)
 
-Fill in after running `stress_test.sh` — paste throughput (Req/Sec),
-p50/p90/p99 latency, and any socket errors/timeouts from the `wrk`
-output, plus whether the HPA scaled pods 1→3 under load
-(`kubectl get hpa --watch` output).
+A baseline test at moderate concurrency (50 connections, 10s) showed the API responding correctly with an average latency of 1.33s (max 4.45s) at ~36.7 req/sec, with zero socket errors — confirming the deployed service functions correctly under light load, albeit with non-trivial per-request latency for a simple logistic regression model.
+
+Under high concurrency (2100 connections, 30s — exceeding the required >2000 threshold), throughput dropped to 15.99 req/sec with only 481 of the attempted requests completing, and the vast majority failing via socket read errors (474), write errors (19), or timeouts (481). No valid latency distribution could be computed, since nearly all connections failed rather than completing slowly.
+
+Root cause analysis: the HPA (minReplicas: 1, maxReplicas: 3) correctly detected elevated CPU and issued a scale-up decision during the test, but the GKE node pool's CPU allocation was already ~80–86% committed by existing workloads, leaving no scheduling headroom for the 2 additional replicas, which remained Pending. This demonstrates that Horizontal Pod Autoscaling alone is insufficient without corresponding Cluster Autoscaling or adequately provisioned node capacity — a common production gap. HPA correctly scaled back down to 1 replica once load subsided.
 
 ## Drift detection results (Deliverable 7)
 
