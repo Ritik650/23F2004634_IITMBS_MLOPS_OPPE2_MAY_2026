@@ -44,6 +44,8 @@ from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer, StandardScaler
 
+from common.preprocessing import encode_gender
+
 FEATURE_COLUMNS = [
     "age", "gender", "cp", "trestbps", "chol", "fbs", "restecg",
     "thalach", "exang", "oldpeak", "slope", "ca", "thal",
@@ -69,12 +71,6 @@ def load_data(data_path: str | None, data_url: str | None) -> pd.DataFrame:
     resp = requests.get(url, timeout=30)
     resp.raise_for_status()
     return pd.read_csv(io.StringIO(resp.text))
-
-
-def encode_gender(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    df["gender"] = df["gender"].map({"male": 1, "female": 0}).astype(float)
-    return df
 
 
 def build_pipeline(C: float, solver: str) -> Pipeline:

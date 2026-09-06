@@ -4,6 +4,7 @@ WORKDIR /build
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY common/ common/
 COPY training/ training/
 
 # Optional: override at build time with --build-arg DATA_URL=...
@@ -22,6 +23,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY common/ common/
 COPY app/ app/
 COPY --from=builder /build/model/ model/
 
