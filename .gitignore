@@ -17,3 +17,4 @@ data/*.csv
 observability/generated_predictions_output.json
 stress_test/results/
 *.log
+.ipynb_checkpoints/
