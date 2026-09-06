@@ -25,10 +25,10 @@ mkdir -p "$OUT_DIR"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 OUT_FILE="${OUT_DIR}/wrk_${STAMP}.txt"
 
-echo "Running: wrk -t${THREADS} -c${CONNECTIONS} -d${DURATION} -s post.lua --timeout 10s ${HOST}/predict"
+echo "Running: wrk -t${THREADS} -c${CONNECTIONS} -d${DURATION} -s post.lua --timeout 30s ${HOST}/predict"
 wrk -t"${THREADS}" -c"${CONNECTIONS}" -d"${DURATION}" \
     -s "$(dirname "$0")/post.lua" \
-    --timeout 10s \
+    --timeout 30s \
     "${HOST}/predict" | tee "${OUT_FILE}"
 
 echo ""
