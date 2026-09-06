@@ -19,7 +19,7 @@ sanity check that the test is working, not necessarily a production
 concern -- this is called out in the printed summary.
 
 Usage:
-    python -m observability.drift_detection \
+    python observability/drift_detection.py \
         --reference model/train_reference.csv \
         --current observability/sample_100.csv \
         --out observability/drift_report.json

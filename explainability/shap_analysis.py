@@ -10,9 +10,9 @@ and writes:
 
 Run locally (needs a local data.csv and a trained model.joblib -- both
 of which are git-ignored build/data artifacts, so run this after
-`python -m training.train` has produced model/model.joblib):
+`python training/train.py` has produced model/model.joblib):
 
-    python -m explainability.shap_analysis \
+    python explainability/shap_analysis.py \
         --model model/model.joblib \
         --data-path data/data.csv \
         --out-dir explainability

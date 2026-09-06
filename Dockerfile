@@ -15,7 +15,7 @@ ENV DATA_URL=${DATA_URL}
 # ever needs to be committed to git. Change DEFAULT_DATA_URL in
 # training/train.py (or pass --build-arg DATA_URL=...) to point at the
 # real course dataset location.
-RUN python training/train.py --out model/model.joblib --metrics-out model/metrics.json
+RUN python -m training.train --out model/model.joblib --metrics-out model/metrics.json
 
 FROM python:3.11-slim
 

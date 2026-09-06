@@ -80,14 +80,14 @@ kubectl get svc heart-disease-api-svc   # grab EXTERNAL-IP once assigned
 
 # Deliverable 2: explainability (needs a local data.csv + a model you
 # trained locally, since neither is committed to git)
-python -m training.train --data-path data/data.csv
-python -m explainability.shap_analysis --data-path data/data.csv
+python training/train.py --data-path data/data.csv
+python explainability/shap_analysis.py --data-path data/data.csv
 
 # Deliverable 3: fairness
-python -m fairness.fairlearn_analysis --data-path data/data.csv
+python fairness/fairlearn_analysis.py --data-path data/data.csv
 
 # Deliverable 5: 100-row generation + per-sample logging
-python -m observability.generate_predictions \
+python observability/generate_predictions.py \
   --api-url http://<EXTERNAL_IP>/predict \
   --reference model/train_reference.csv
 # then inspect Cloud Logging:
@@ -99,7 +99,7 @@ sudo apt-get install -y wrk
 ./stress_test/stress_test.sh http://<EXTERNAL_IP> 30s 12 2500
 
 # Deliverable 7: drift detection
-python -m observability.drift_detection \
+python observability/drift_detection.py \
   --reference model/train_reference.csv \
   --current observability/sample_100.csv
 ```

@@ -15,7 +15,7 @@ Deliverable 5: per-sample prediction + logging/observability.
    stress-test replay in Deliverable 6.
 
 Usage:
-    python -m observability.generate_predictions \
+    python observability/generate_predictions.py \
         --api-url http://<EXTERNAL_IP>/predict \
         --reference model/train_reference.csv \
         --n 100 \

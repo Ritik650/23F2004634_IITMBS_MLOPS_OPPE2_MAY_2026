@@ -21,7 +21,7 @@ Outputs:
 Run after training (needs data/data.csv + model/model.joblib, both
 git-ignored):
 
-    python -m fairness.fairlearn_analysis \
+    python fairness/fairlearn_analysis.py \
         --model model/model.joblib --data-path data/data.csv
 """
 
