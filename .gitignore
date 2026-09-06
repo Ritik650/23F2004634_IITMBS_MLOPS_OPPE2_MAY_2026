@@ -1,0 +1,19 @@
+# never commit binary output artifacts
+*.joblib
+*.pkl
+*.pickle
+model/
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# never commit the training data / any dataset split
+data/*.csv
+*.csv
+!observability/sample_100_schema.csv
+
+# local run artifacts
+observability/generated_predictions_output.json
+stress_test/results/
+*.log

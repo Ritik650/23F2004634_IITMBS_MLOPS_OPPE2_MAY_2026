@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.git
+.github
+data/
+*.csv
+*.ipynb
+.venv
+observability/*.json
+observability/*.csv
+stress_test/results/
